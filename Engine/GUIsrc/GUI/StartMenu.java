@@ -1,16 +1,24 @@
-
 package GUI;
+
+import guiInterface.StartMenuListeners;
+
 import javax.swing.*;
+
 import java.awt.*;
 
 /**
  * The start menu GUI for our game.
- * @author lewis_000 && (add your name here when you make changes)
+ * @author lewis_000 && Reid Thompson_001
  * @version 1.01
  */
 public class StartMenu {
-	JFrame optionsFrame = new JFrame();
 	
+	/**
+	 * A Object containing the two ActionListeners for the StartMenu.
+	 */
+	private static final StartMenuListeners LISTENERS = new StartMenuListeners();
+	
+	JFrame optionsFrame = new JFrame();
 	JFrame guiFrame = new JFrame();
 	JPanel fittingPanel = new JPanel();
 	JPanel btnPanel = new JPanel();
@@ -38,16 +46,25 @@ public class StartMenu {
 		//Setting up the start button
 		startBtn.setMaximumSize(new Dimension(100, 40));
 		startBtn.setText("Start");
+		startBtn.addActionListener(LISTENERS.new StartButtonListener());
 		
 		//Setting up the options button
 		optionsBtn.setMaximumSize(new Dimension(100, 40));
 		optionsBtn.setText("Options");
+		optionsBtn.addActionListener(LISTENERS.new OptionsButtonListener());
 		
-		//Adding the buttons to the button panel (including rigid areas for spacing
-		btnPanel.add(Box.createRigidArea(new Dimension(30,100)));
+		//Adding the buttons to the button panel (including rigid areas for spacing)
+		btnPanel.add(Box.createRigidArea(new Dimension(30, 100)));
 		btnPanel.add(startBtn);
 		btnPanel.add(Box.createRigidArea(new Dimension(30, 20)));
 		btnPanel.add(optionsBtn);
+		
+		addFeatures();
+	}
+	
+	public void addFeatures() {
+		// add music
+		// add concept art to sides of main frame
 	}
 	
 	public static void OpenOptionsMenu()
