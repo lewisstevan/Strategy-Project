@@ -1,5 +1,7 @@
 package engine.interfaces.abstracts;
 
+import engine.interfaces.Race;
+
 /**
  * This abstract class will be a setup fields and methods
  * for a race.
