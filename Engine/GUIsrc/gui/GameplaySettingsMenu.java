@@ -2,8 +2,10 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.Box;
@@ -14,6 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.SwingConstants;
 
 /**
  * The gameplay settings menu for the game.
@@ -101,7 +104,10 @@ public class GameplaySettingsMenu
 		fillerPanel = new JPanel();
 		startGamePanel = new JPanel();
 		startGameButton = new JButton();
-		
+		raceSelectionLabel = new JLabel();
+		difficultySelectionLabel = new JLabel();
+		resourceDensityLabel = new JLabel();
+		mapSizeLabel = new JLabel();
 		setup();
 	}
 	
@@ -154,11 +160,11 @@ public class GameplaySettingsMenu
 		
 		// Creates the buttons of this panel, initially Knight Race button is selected
 		final JRadioButton knightRace = new JRadioButton("Knight Race", true);
-		knightRace.setSize(DEFAULT_BUTTON_SIZE);
+		knightRace.setAlignmentX(Component.CENTER_ALIGNMENT);
 		final JRadioButton techRace = new JRadioButton("Tech Race");
-		techRace.setSize(DEFAULT_BUTTON_SIZE);
+		techRace.setAlignmentX((float) 0.55);
 		final JRadioButton mageRace = new JRadioButton("Mage Race");
-		mageRace.setSize(DEFAULT_BUTTON_SIZE);
+		mageRace.setAlignmentX((float) 0.53);
 		
 		// Adds buttons to buttonGroup
 		final ButtonGroup group = new ButtonGroup();
@@ -166,8 +172,13 @@ public class GameplaySettingsMenu
 		group.add(techRace);
 		group.add(mageRace);
 		
+		//Sets up the JLabel for the race panel.
+		raceSelectionLabel.setText("Select Your Race:");
+		raceSelectionLabel.setFont(new Font("serif", Font.PLAIN, 20));
 		// Adds buttons to panel (includes rigid areas for spacing)
-		racePanel.add(Box.createRigidArea(new Dimension(100, 10)));
+
+		raceSelectionLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		racePanel.add(raceSelectionLabel);
 		racePanel.add(knightRace);
 		racePanel.add(techRace);
 		racePanel.add(mageRace);
