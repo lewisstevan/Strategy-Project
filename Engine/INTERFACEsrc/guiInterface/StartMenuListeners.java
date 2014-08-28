@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import gui.GameplaySettingsMenu;
+import gui.StartMenu;
 
 /**
  * Contains the various ActionListeners associated with the StartMenu class.
@@ -15,23 +16,28 @@ import gui.GameplaySettingsMenu;
  * @author Lewis_000 && Thompson_002
  * @version 1.01
  */
-public class StartMenuListeners {
+public class StartMenuListeners 
+{
 	
 	/**
-	 * An ActionListener for the StartMenu's start button.
+	 * Describes the ActionListener for the start button in StartMenu.java
+	 * @author Thompson_002
+	 * @version 1.04
 	 */
-    public class StartButtonListener implements ActionListener {
+    public class StartButtonListener implements ActionListener 
+    {
 		
 		/**
 		 * The operation performed when the Start button of the StartMenu is clicked.
 		 * @param e the incoming event.
 		 */
 		@Override
-		public void actionPerformed(final ActionEvent e) {
-			// how to close StartMenu ???
+		public void actionPerformed(final ActionEvent e) 
+		{
+			StartMenu.Close();
 			new GameplaySettingsMenu();
 		}
-	} // end of StartButtonListener inner class
+	} 
     
     /**
 	 * An ActionListener for the StartMenu's options button.
@@ -43,7 +49,8 @@ public class StartMenuListeners {
 		 * @param e the incoming event.
 		 */
 		@Override
-		public void actionPerformed(final ActionEvent e) {
+		public void actionPerformed(final ActionEvent e) 
+		{
 			// implement this feature later
 		}
 	} // end of OptionsButtonListener inner class
