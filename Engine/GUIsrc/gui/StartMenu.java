@@ -5,6 +5,10 @@ import guiInterface.StartMenuListeners;
 import javax.swing.*;
 
 import java.awt.*;
+import java.io.File;
+
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.media.*;
 
 /**
  * The start menu GUI for the game.
@@ -14,6 +18,15 @@ import java.awt.*;
  */
 public class StartMenu 
 {
+	/**
+	 * A Media object to run through the media player.
+	 */
+	private Media music;
+	
+	/**
+	 * A MediaPlayer object to play the Media objects.
+	 */
+	private MediaPlayer mediaPlayer;
 	
 	/**
 	 * A Object containing the two ActionListeners for the StartMenu.
@@ -63,6 +76,14 @@ public class StartMenu
 	 */
 	public StartMenu()
 	{	
+		//A JFXPanel to jump-start the toolkit required to play music.
+		new JFXPanel();
+		
+		//Setting up the Media object with the correct path to the mp3 as well as 
+		//linking it to the MediaPlayer itself.
+		music = new Media(new File("music\\intro.mp3").toURI().toString());
+		mediaPlayer = new MediaPlayer(music);
+		
 		guiFrame = new JFrame();
 		fittingPanel = new JPanel();
 		btnPanel = new JPanel();
@@ -70,6 +91,7 @@ public class StartMenu
 		LoadBtn = new JButton();
 		
 		setup();
+		mediaPlayer.play();
 	}
 	
 	/**
@@ -128,12 +150,32 @@ public class StartMenu
 		// add concept art to sides of main frame
 	}
 	
+	/**
+	 * Closes the StartMenu without conflicting with music settings
+	 * (keeps the actual resource alive).
+	 */
 	public static void Close()
+	{
+		guiFrame.setVisible(false);
+	}
+	
+	/**
+	 * Re-opens the panel without causing multiple threads of music
+	 * to play at once.
+	 */
+	public static void Open()
+	{
+		guiFrame.setVisible(true);
+	}
+	
+	/**
+	 * Finally kills the panel and all of its resource
+	 * allocations once the game starts.
+	 */
+	public static void Destroy()
 	{
 		guiFrame.dispose();
 	}
-	
-	
 	
 	/**
 	 * Begins the Strategy Project GUI (only use for testing, delete afterwards).

@@ -23,7 +23,7 @@ public class GamePlaySettingsMenuListeners {
 		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			new StartMenu();
+			StartMenu.Open();
 			GameplaySettingsMenu.Close();
 		}	
 	}	
