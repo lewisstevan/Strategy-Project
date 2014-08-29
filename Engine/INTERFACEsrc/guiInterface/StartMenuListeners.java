@@ -2,11 +2,6 @@ package guiInterface;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
 import gui.GameplaySettingsMenu;
 import gui.StartMenu;
 
@@ -21,12 +16,11 @@ public class StartMenuListeners
 	
 	/**
 	 * Describes the ActionListener for the start button in StartMenu.java
-	 * @author Thompson_002
+	 * @author Thompson_002 & Lewis_000
 	 * @version 1.04
 	 */
     public class StartButtonListener implements ActionListener 
     {
-		
 		/**
 		 * The operation performed when the Start button of the StartMenu is clicked.
 		 * @param e the incoming event.
@@ -41,6 +35,8 @@ public class StartMenuListeners
     
     /**
 	 * An ActionListener for the StartMenu's options button.
+	 * @author Thompson_002 & Lewis_000
+	 * @version 1.01
 	 */
     public class OptionsButtonListener implements ActionListener {
 		
@@ -53,5 +49,5 @@ public class StartMenuListeners
 		{
 			// implement this feature later
 		}
-	} // end of OptionsButtonListener inner class
-} // end of StartMenuListeners class
+	} 
+}

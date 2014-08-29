@@ -1,13 +1,11 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
+import guiInterface.GamePlaySettingsMenuListeners;
+
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
-
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -16,34 +14,29 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.SwingConstants;
 
 /**
- * The gameplay settings menu for the game.
+ * The game-play settings menu for the game.
  * 
- * @author Thompson_000
- * @version 1.01
+ * @author Thompson_000 & Stevan Lewis
+ * @version 1.04
  */
 public class GameplaySettingsMenu 
 {
-
+	
+	private static final GamePlaySettingsMenuListeners LISTENERS = new GamePlaySettingsMenuListeners();
 	/**
 	 * A default Dimension for the fittingPanel's subpanels.
 	 */
 	private static final Dimension DEFAULT_SUBPANEL_SIZE = new Dimension(250, 250);
 	
 	/**
-	 * A default Dimension for the subpanels' radio buttons.
-	 */
-	private static final Dimension DEFAULT_BUTTON_SIZE = new Dimension(20, 80);
-	
-	/**
 	 * The overall frame for this menu.
 	 */
-	JFrame guiFrame;
+	static JFrame guiFrame;
 	
 	/**
-	 * A containing panel for various subpanels.
+	 * A containing panel for various sub-panels.
 	 */
 	JPanel fittingPanel;
 	
@@ -82,12 +75,29 @@ public class GameplaySettingsMenu
 	 */
 	JButton startGameButton; // no listener currently attached
 	
+	/**
+	 * A button to go back to the main menu.
+	 */
+	JButton backButton;
+	
+	/**
+	 * A label for the race selection category.
+	 */
 	JLabel raceSelectionLabel;
 	
+	/**
+	 * A label for the difficulty selection category.
+	 */
 	JLabel difficultySelectionLabel;
 	
+	/**
+	 * A label for the resource density selection category.
+	 */
 	JLabel resourceDensityLabel;
 	
+	/**
+	 * A label for the map size selection category.
+	 */
 	JLabel mapSizeLabel;
 	
 	/**
@@ -104,6 +114,7 @@ public class GameplaySettingsMenu
 		fillerPanel = new JPanel();
 		startGamePanel = new JPanel();
 		startGameButton = new JButton();
+		backButton = new JButton();
 		raceSelectionLabel = new JLabel();
 		difficultySelectionLabel = new JLabel();
 		resourceDensityLabel = new JLabel();
@@ -124,27 +135,20 @@ public class GameplaySettingsMenu
 		guiFrame.setLocationRelativeTo(null);
 		guiFrame.setVisible(true);
 		guiFrame.setLayout(new FlowLayout());
-		// add titlePanel with titleLabel like StartMenu?
 		
-//		// Setting up and adding the fittingPanel
-//		fittingPanel.setLayout(new GridLayout(3, 3));
-//		guiFrame.add(fittingPanel, BorderLayout.CENTER);
 		
-		// Sets up all subpanels of the fittingPanel
+		// Sets up all sub-panels of the fittingPanel
 		setupRacePanel();
 		setupAIDifficultyPanel();
 		setupMapSizePanel();
 		setupResourceDensityPanel();
-//		fillerPanel.setSize(DEFAULT_SUBPANEL_SIZE); // add functionality, define purpose
-//													// possible use: concept art display?
 		setupStartGamePanel();
 		
-		// Adds all subpanels to the fittingPanel
+		// Adds all sub-panels to the fittingPanel
 		guiFrame.add(racePanel);
 		guiFrame.add(aiDifficultyPanel);
 		guiFrame.add(mapSizePanel);
 		guiFrame.add(resourceDensityPanel);
-		//guiFrame.add(fillerPanel);
 		guiFrame.add(startGamePanel);
 	}
 	
@@ -156,7 +160,6 @@ public class GameplaySettingsMenu
 		// Sets attributes of the racePanel
 		racePanel.setPreferredSize(DEFAULT_SUBPANEL_SIZE);
 		racePanel.setLayout(new BoxLayout(racePanel, BoxLayout.PAGE_AXIS));
-		racePanel.setBackground(Color.RED);
 		
 		// Creates the buttons of this panel, initially Knight Race button is selected
 		final JRadioButton knightRace = new JRadioButton("Knight Race", true);
@@ -175,8 +178,9 @@ public class GameplaySettingsMenu
 		//Sets up the JLabel for the race panel.
 		raceSelectionLabel.setText("Select Your Race:");
 		raceSelectionLabel.setFont(new Font("serif", Font.PLAIN, 20));
-		// Adds buttons to panel (includes rigid areas for spacing)
-
+		
+		
+		// Adds buttons to panel
 		raceSelectionLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		racePanel.add(raceSelectionLabel);
 		racePanel.add(knightRace);
@@ -192,24 +196,29 @@ public class GameplaySettingsMenu
 		// Sets attributes of the aiDifficultyPanel
 		aiDifficultyPanel.setPreferredSize(DEFAULT_SUBPANEL_SIZE);
 		aiDifficultyPanel.setLayout(new BoxLayout(aiDifficultyPanel, BoxLayout.PAGE_AXIS));
-		aiDifficultyPanel.setBackground(Color.green);
 		
 		// Creates the buttons of this panel, initially Easy button is selected
 		final JRadioButton easyDiff = new JRadioButton("Easy Difficulty", true);
-		easyDiff.setSize(DEFAULT_BUTTON_SIZE);
+		easyDiff.setAlignmentX(Component.CENTER_ALIGNMENT);
 		final JRadioButton medDiff = new JRadioButton("Medium Difficulty");
-		medDiff.setSize(DEFAULT_BUTTON_SIZE);
+		medDiff.setAlignmentX((float) 0.43);
 		final JRadioButton hardDiff = new JRadioButton("Hard Difficulty");
-		hardDiff.setSize(DEFAULT_BUTTON_SIZE);
+		hardDiff.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
-		// Adds buttons to buttonGroup
+		// Adds buttons to buttonGroup, the medium Difficulty is selected by default.
 		final ButtonGroup group = new ButtonGroup();
 		group.add(easyDiff);
 		group.add(medDiff);
 		group.add(hardDiff);
+		medDiff.setSelected(true);
+		
+		//Sets up the JLabel for the difficulty panel.
+		difficultySelectionLabel.setText("Select a Difficulty Level:");
+		difficultySelectionLabel.setFont(new Font("serif", Font.PLAIN, 20));
 		
 		// Adds buttons to panel (includes rigid areas for spacing)
-		aiDifficultyPanel.add(Box.createRigidArea(new Dimension(100, 10)));
+		difficultySelectionLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		aiDifficultyPanel.add(difficultySelectionLabel);
 		aiDifficultyPanel.add(easyDiff);
 		aiDifficultyPanel.add(medDiff);
 		aiDifficultyPanel.add(hardDiff);
@@ -223,24 +232,29 @@ public class GameplaySettingsMenu
 		// Sets attributes of the mapSizePanel
 		mapSizePanel.setPreferredSize(DEFAULT_SUBPANEL_SIZE);
 		mapSizePanel.setLayout(new BoxLayout(mapSizePanel, BoxLayout.PAGE_AXIS));
-		mapSizePanel.setBackground(Color.blue);
 		
 		// Creates the buttons of this panel, initially smallSize button is selected
 		final JRadioButton smallSize = new JRadioButton("Small Size", true);
-		smallSize.setSize(DEFAULT_BUTTON_SIZE);
+		smallSize.setAlignmentX(Component.CENTER_ALIGNMENT);
 		final JRadioButton medSize = new JRadioButton("Medium Size");
-		medSize.setSize(DEFAULT_BUTTON_SIZE);
+		medSize.setAlignmentX((float) 0.44);
 		final JRadioButton largeSize = new JRadioButton("Large Size");
-		largeSize.setSize(DEFAULT_BUTTON_SIZE);
+		largeSize.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		// Adds buttons to buttonGroup
 		final ButtonGroup group = new ButtonGroup();
 		group.add(smallSize);
 		group.add(medSize);
 		group.add(largeSize);
+		medSize.setSelected(true);
+		
+		//Sets up the JLabel for the map size panel.
+		mapSizeLabel.setText("Select the Map Size:");
+		mapSizeLabel.setFont(new Font("serif", Font.PLAIN, 20));
 		
 		// Adds buttons to panel (includes rigid areas for spacing)
-		mapSizePanel.add(Box.createRigidArea(new Dimension(100, 10)));
+		mapSizeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		mapSizePanel.add(mapSizeLabel);
 		mapSizePanel.add(smallSize);
 		mapSizePanel.add(medSize);
 		mapSizePanel.add(largeSize);
@@ -255,24 +269,29 @@ public class GameplaySettingsMenu
 		resourceDensityPanel.setPreferredSize(DEFAULT_SUBPANEL_SIZE);
 		resourceDensityPanel.setLayout(new BoxLayout(resourceDensityPanel, 
 				BoxLayout.PAGE_AXIS));
-		resourceDensityPanel.setBackground(Color.white);
 		
-		// Creates the buttons of this panel, initially fewRsrcs button is selected
+		// Creates the buttons of this panel
 		final JRadioButton fewRsrcs = new JRadioButton("Few Resources", true);
-		fewRsrcs.setSize(DEFAULT_BUTTON_SIZE);
+		fewRsrcs.setAlignmentX(Component.CENTER_ALIGNMENT);
 		final JRadioButton avgRsrcs = new JRadioButton("Average Resources");
-		avgRsrcs.setSize(DEFAULT_BUTTON_SIZE);
+		avgRsrcs.setAlignmentX((float) 0.41);
 		final JRadioButton manyRsrcs = new JRadioButton("Many Resources");
-		manyRsrcs.setSize(DEFAULT_BUTTON_SIZE);
+		manyRsrcs.setAlignmentX((float) 0.47);
 		
-		// Adds buttons to buttonGroup
+		// Adds buttons to buttonGroup, average resources selected by default.
 		final ButtonGroup group = new ButtonGroup();
 		group.add(fewRsrcs);
 		group.add(avgRsrcs);
 		group.add(manyRsrcs);
+		avgRsrcs.setSelected(true);
+		
+		//Sets up the JLabel for the resource density panel.
+		resourceDensityLabel.setText("Select resource Density:");
+		resourceDensityLabel.setFont(new Font("serif", Font.PLAIN, 20));
 		
 		// Adds buttons to panel (includes rigid areas for spacing)
-		resourceDensityPanel.add(Box.createRigidArea(new Dimension(100, 10)));
+		resourceDensityLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		resourceDensityPanel.add(resourceDensityLabel);
 		resourceDensityPanel.add(fewRsrcs);
 		resourceDensityPanel.add(avgRsrcs);
 		resourceDensityPanel.add(manyRsrcs);
@@ -285,16 +304,33 @@ public class GameplaySettingsMenu
 	{
 		// Sets up startGamePanel's attributes.
 		startGamePanel.setPreferredSize(new Dimension(guiFrame.getWidth(), 50));
-		startGamePanel.setLayout(new BoxLayout(startGamePanel, BoxLayout.PAGE_AXIS));
-		startGamePanel.setBackground(Color.black);
+		startGamePanel.setLayout(new BoxLayout(startGamePanel, BoxLayout.LINE_AXIS));
 		
 		// Setting up start game button
 		startGameButton.setSize(new Dimension(40, 20));
 		startGameButton.setText("Start New Game");
+		startGameButton.addActionListener(LISTENERS.new NewGameButtonListener());
 		// add action listener to startGameButton here
 		
+		//Setting up the back button
+		backButton.setSize(new Dimension(40, 20));
+		backButton.setText("Back");
+		backButton.addActionListener(LISTENERS.new BackButtonListener());
+		
+		
+		
 		// Adding startGameButton to startGamePanel (includes rigid areas for spacing)
-		startGamePanel.add(Box.createRigidArea(new Dimension(167, 13)));
+		startGamePanel.add(Box.createRigidArea(new Dimension(165, 13)));
+		startGamePanel.add(backButton);
+		startGamePanel.add(Box.createRigidArea(new Dimension(110, 0)));
 		startGamePanel.add(startGameButton);
+		
+		//Sets the focus of the frame.
+		guiFrame.getRootPane().setDefaultButton(startGameButton);
+	}
+	
+	public static void Close()
+	{
+		guiFrame.dispose();
 	}
 } // end of GameplaySettingsMenu class

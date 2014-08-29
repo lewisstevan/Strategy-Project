@@ -48,9 +48,6 @@ public class StartMenu
 	 */
 	JPanel btnPanel;
 	
-	
-
-	
 	/**
 	 * The start button that brings the user to the GameplaySettingsMenu.
 	 */
@@ -60,7 +57,6 @@ public class StartMenu
 	 * The option button that brings the user to another menu detailing various options.
 	 */
 	JButton LoadBtn; // listener functionality not yet implemented
-	
 	
 	/**
 	 * Initializes the menu's components.
@@ -118,8 +114,8 @@ public class StartMenu
 		btnPanel.add(Box.createRigidArea(new Dimension(16, 10))); // changed from 30, 100
 		btnPanel.add(LoadBtn);
 		
-		
-		
+		//Sets the focus of the gui.
+		guiFrame.getRootPane().setDefaultButton(NewGameBtn);
 		addFeatures();
 	}
 	
@@ -140,7 +136,7 @@ public class StartMenu
 	
 	
 	/**
-	 * Begins the Strategy Project application.
+	 * Begins the Strategy Project GUI (only use for testing, delete afterwards).
 	 * 
 	 * @param args are ignored.
 	 */
@@ -148,4 +144,4 @@ public class StartMenu
 	{
 		new StartMenu();
 	}
-} // end of StartMenu class
+} 
