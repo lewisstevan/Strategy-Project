@@ -1,6 +1,5 @@
-package engine.interfaces.abstracts;
+package engine.interfaces;
 
-import engine.interfaces.Unit;
 
 /**
  * This abstract class will act an original for all
