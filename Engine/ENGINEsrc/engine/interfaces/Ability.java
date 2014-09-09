@@ -9,33 +9,33 @@ import engine.tools.MapPoint;
  * @author trent && Stevan
  * @version 9/7/2014
  */
-abstract class Ability {
+public abstract class Ability {
 	
 	/**
 	 * A variable to hold the turn cool down integer.
 	 */
-	int TurnCost;
+	protected int TurnCost;
 	
 	/**
 	 * A variable to hold the damage count of the ability.
 	 */
-	int Damage;
+	protected int Damage;
 	
 	/**
 	 * A variable to hold the current cool down count of the ability.
 	 */
-	int CurrentCoolDown;
+	protected int CurrentCoolDown;
 	
 	/**
 	 * A variable to hold the range of the ability.
 	 */
-	int Range;
+	protected int Range;
 	
 	/**
 	 * A query of the abilities range.
 	 * @return Range the range of this ability.
 	 */
-	int getRange()
+	public int getRange()
 	{
 		return Range;
 	}
@@ -44,7 +44,7 @@ abstract class Ability {
 	 * A query of the abilities damage.
 	 * @return Damage the damage this ability will do.
 	 */
-	int getDamage()
+	public int getDamage()
 	{
 		return Damage;
 	}
@@ -54,7 +54,7 @@ abstract class Ability {
 	 * @return TurnCost the amount of time players must wait before
 	 * using this ability again.
 	 */
-	int getTurnCost()
+	public int getTurnCost()
 	{
 		return TurnCost;
 	}
@@ -64,7 +64,7 @@ abstract class Ability {
 	 * @return CurrentCoolDown the amount of time remaining before players
 	 * can use this ability again.
 	 */
-	int getCurrentCoolDown()
+	public int getCurrentCoolDown()
 	{
 		return CurrentCoolDown;
 	}
@@ -74,5 +74,5 @@ abstract class Ability {
 	 * @param playerTarget The selected target of this ability as defined by 
 	 * the selected grid's x and y coordinates.
 	 */
-	abstract void activate(MapPoint playerTarget);
+	public abstract void activate(MapPoint playerTarget);
 }

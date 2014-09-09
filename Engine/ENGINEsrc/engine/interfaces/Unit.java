@@ -7,6 +7,6 @@ package engine.interfaces;
  * @author trent
  * @version 20140821
  */
-interface Unit {
+public interface Unit {
 
 }

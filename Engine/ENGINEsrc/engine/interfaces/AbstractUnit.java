@@ -8,6 +8,6 @@ package engine.interfaces;
  * @author trent
  * @version 20140821
  */
-abstract class AbstractUnit implements Unit {
+public abstract class AbstractUnit implements Unit {
 
 }
