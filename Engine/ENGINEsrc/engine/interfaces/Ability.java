@@ -74,5 +74,5 @@ public abstract class Ability {
 	 * @param playerTarget The selected target of this ability as defined by 
 	 * the selected grid's x and y coordinates.
 	 */
-	public abstract void activate(MapPoint playerTarget);
+	public abstract void activate(AbstractUnit unit, MapPoint playerTarget);
 }

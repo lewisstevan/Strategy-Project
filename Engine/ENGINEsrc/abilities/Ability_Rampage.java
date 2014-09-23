@@ -1,5 +1,6 @@
 package abilities;
 
+import engine.interfaces.AbstractUnit;
 import engine.interfaces.AoEAbility;
 import engine.tools.MapPoint;
 
@@ -18,7 +19,7 @@ public class Ability_Rampage extends AoEAbility {
 	}
 	
 	@Override
-	public void activate(MapPoint playerTarget) {
+	public void activate(AbstractUnit unit, MapPoint playerTarget) {
 		// TODO Auto-generated method stub
 		
 	}

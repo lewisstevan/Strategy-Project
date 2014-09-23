@@ -1,8 +1,8 @@
 package abilities;
 
+import engine.interfaces.AbstractUnit;
 import engine.interfaces.AoEAbility;
 import engine.tools.MapPoint;
-import gui.StartMenu;
 
 /**
  * Causes all units (even allies) within a 2 square radius 
@@ -13,6 +13,7 @@ import gui.StartMenu;
  */
 public class Ability_Recklass extends AoEAbility 
 {
+	MapPoint recklassDistance;
 	
 	public Ability_Recklass()
 	{
@@ -21,8 +22,14 @@ public class Ability_Recklass extends AoEAbility
 	}
 	
 	@Override
-	public void activate(MapPoint playerTarget) {
+	public void activate(AbstractUnit unit, MapPoint playerTarget) {
+		//unimplemented methods must be created
+		recklassMove(unit, playerTarget);
 		// TODO Auto-generated method stub
+		
+	}
+	
+	private void recklassMove(AbstractUnit unit, MapPoint playerTarget) {
 		
 	}
 }
