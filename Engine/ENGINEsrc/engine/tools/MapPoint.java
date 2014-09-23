@@ -22,7 +22,7 @@ public class MapPoint {
 		this.y_axis = y_axis;
 	}
 	
-	public static void createPath(MapPoint currentPoint, MapPoint endPoint)
+	public static LinkedList<MapPoint> createPath(MapPoint currentPoint, MapPoint endPoint)
 	{
 		pathDistance = new MapPoint(currentPoint.getX() - endPoint.getX(), currentPoint.getY() - endPoint.getY());
 		if (pathDistance.getX() == 0 && pathDistance.getY() == 0)
@@ -49,11 +49,57 @@ public class MapPoint {
 		{
 			quadrantFourPath(currentPoint, endPoint);
 		}
+		
+		return pathQueue;
 	}
 	
-	private static void quadrantOnePath(MapPoint currentPoint, MapPoint endPoint)
+	private static MapPoint quadrantOnePath(MapPoint currentPoint, MapPoint endPoint)
 	{
-		if (MapTile.checkTileOccupied(currentPoint) == true)
+		if (MapTile.checkTileOccupied(currentPoint) == true || currentPoint == endPoint)
+		{
+			if (MapTile.checkTileOccupied(currentPoint) == true)
+			{
+				pathQueue.remove();
+				currentPoint = pathQueue.peek();
+			}
+			return currentPoint;
+		}
+		
+		if (!(currentPoint.equals(endPoint)) && currentPoint.getX() != 0 && currentPoint.getY() != 0)
+		{
+			currentPoint.set(currentPoint.getX() + 1, currentPoint.getY() - 1);
+			pathQueue.add(currentPoint);
+			currentPoint = quadrantOnePath(currentPoint, endPoint);
+		}
+		
+		if (!(currentPoint.equals(endPoint)) && currentPoint.getY() != 0)
+		{
+			currentPoint.set(currentPoint.getY() - 1, currentPoint.getX());
+			pathQueue.add(currentPoint);
+			currentPoint = quadrantOnePath(currentPoint, endPoint);
+		}
+		
+		if (!(currentPoint.equals(endPoint)) && currentPoint.getX() != 0)
+		{
+			currentPoint.set(currentPoint.getX() + 1, currentPoint.getY());
+			pathQueue.add(currentPoint);
+			currentPoint = quadrantOnePath(currentPoint, endPoint);
+		}
+		
+		if (!(currentPoint.equals(endPoint)))
+		{
+			currentPoint.set(currentPoint.getX(), currentPoint.getY() + 1);
+			pathQueue.add(currentPoint);
+			currentPoint = quadrantOnePath(currentPoint, endPoint);
+		}
+		
+		if (!(currentPoint.equals(endPoint)))
+		{
+			currentPoint.set(currentPoint.getX() - 1, currentPoint.getY());
+			pathQueue.add(currentPoint);
+			currentPoint = quadrantOnePath(currentPoint, endPoint);
+		}
+		return currentPoint;
 	}
 	
 	private static void quadrantTwoPath(MapPoint start, MapPoint end)
@@ -108,5 +154,23 @@ public class MapPoint {
 				(Integer.compare(y_axis, c.getY()) == 0));
 		}
 		return equality;	
+	}
+	
+	@Override
+	public int hashCode()
+	{
+		return x_axis;
+	}
+	
+	@Override
+	public String toString()
+	{
+		String result;
+		StringBuilder sb = new StringBuilder();
+		sb.append("X value is: " + x_axis + "\n");
+		sb.append("Y value is: " + y_axis + "\n");
+		
+		result = "" + sb;
+		return result;
 	}
 }
