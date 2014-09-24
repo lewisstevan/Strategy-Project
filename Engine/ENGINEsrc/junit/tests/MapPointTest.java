@@ -29,6 +29,6 @@ public class MapPointTest {
 	@Test
 	public void test() {
 		assertEquals("Method MapPoint.createPath did not"
-				+ "create the appropriate MapPoint", finalList.remove().toString(), testPath.toString());
+				+ "create the appropriate MapPoint", finalList.remove().toString(), testPath.removeLast());
 	}
 }
