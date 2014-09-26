@@ -3,6 +3,8 @@
  */
 package units;
 
+import engine.interfaces.AbstractUnit;
+
 /**
  * With this class I am attempting to follow suit of the general discussion
  * regarding gameplay. I have very little experience with this type of gameplay
@@ -12,6 +14,6 @@ package units;
  * @version 1.0.
  *
  */
-public interface Unit_Wizard {
+public class Unit_Wizard extends AbstractUnit {
 
 }
