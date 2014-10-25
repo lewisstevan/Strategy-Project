@@ -56,17 +56,13 @@ public class MapPoint {
 	
 	private static void quadrantOnePath(MapPoint currentPoint, MapPoint endPoint)
 	{
-		if ((MapTile.checkTileOccupied(currentPoint) == true) || currentPoint.equals(endPoint))
+		if (currentPoint.equals(endPoint))
 		{
-			if (MapTile.checkTileOccupied(currentPoint) == true)
-			{
-				pathQueue.remove();
-				currentPoint = pathQueue.peek();
-			}
 			return;
 		}
 		
-		if (!(currentPoint.equals(endPoint)) && (currentPoint.getX() != 0) && (currentPoint.getY() != 0))
+		else if (!(currentPoint.equals(endPoint)) && (currentPoint.getX() != 0) && (currentPoint.getY() != 0)
+				&& MapTile.checkTileOccupied(new MapPoint(currentPoint.getX() + 1, currentPoint.getY())) == false)
 		{
 
 			currentPoint.set(currentPoint.getX() + 1, currentPoint.getY() - 1);
@@ -77,33 +73,39 @@ public class MapPoint {
 			
 		}
 		
-		if (!(currentPoint.equals(endPoint)) && currentPoint.getY() != 0)
+		else if (!(currentPoint.equals(endPoint)) && (currentPoint.getY() != 0)
+			&& MapTile.checkTileOccupied(new MapPoint(currentPoint.getX(), currentPoint.getY() - 1)) == false)
 		{
 			currentPoint.set(currentPoint.getY() - 1, currentPoint.getX());
 			pathQueue.add(currentPoint);
 			quadrantOnePath(currentPoint, endPoint);
 		}
 		
-		if (!(currentPoint.equals(endPoint)) && currentPoint.getX() != 0)
+		else if (!(currentPoint.equals(endPoint)) && (currentPoint.getX() != 0)
+			&& MapTile.checkTileOccupied(new MapPoint(currentPoint.getX(), currentPoint.getY() - 1)) == false)
 		{
 			currentPoint.set(currentPoint.getX() + 1, currentPoint.getY());
 			pathQueue.add(currentPoint);
 			quadrantOnePath(currentPoint, endPoint);
 		}
 		
-		if (!(currentPoint.equals(endPoint)))
+		else if (!(currentPoint.equals(endPoint))
+			&& MapTile.checkTileOccupied(new MapPoint(currentPoint.getX(), currentPoint.getY() - 1)) == false)
 		{
 			currentPoint.set(currentPoint.getX(), currentPoint.getY() + 1);
 			pathQueue.add(currentPoint);
 			quadrantOnePath(currentPoint, endPoint);
 		}
 		
-		if (!(currentPoint.equals(endPoint)))
+		else if (!(currentPoint.equals(endPoint))
+			&& MapTile.checkTileOccupied(new MapPoint(currentPoint.getX(), currentPoint.getY() - 1)) == false)
 		{
 			currentPoint.set(currentPoint.getX() - 1, currentPoint.getY());
 			pathQueue.add(currentPoint);
 			quadrantOnePath(currentPoint, endPoint);
 		}
+		
+		
 	}
 	
 	private static void quadrantTwoPath(MapPoint start, MapPoint end)
@@ -176,5 +178,7 @@ public class MapPoint {
 		
 		result = "" + sb;
 		return result;
+		
+		Map awesome - new Map<Object>
 	}
 }
