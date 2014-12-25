@@ -3,6 +3,8 @@ package engine.tools;
 import java.awt.Point;
 import java.util.LinkedList;
 
+import engine.tools.MapTile.Occupant;
+
 /**
  * A point representing a specific location on the map.
  * @author lewis_000
@@ -16,14 +18,17 @@ public class MapPoint {
 	
 	private static LinkedList<MapPoint> pathQueue;
 	
+	private static GameBoard myGameBoard;
+	
 	public MapPoint(int x_axis, int y_axis)
 	{
 		this.x_axis = x_axis;
 		this.y_axis = y_axis;
 	}
 	
-	public static LinkedList<MapPoint> createPath(MapPoint currentPoint, MapPoint endPoint)
+	public static LinkedList<MapPoint> createPath(MapPoint currentPoint, MapPoint endPoint, GameBoard theBoard)
 	{
+		myGameBoard = theBoard;
 		pathQueue = new LinkedList<>();
 		pathDistance = new MapPoint(currentPoint.getX() - endPoint.getX(), currentPoint.getY() - endPoint.getY());
 		if (pathDistance.getX() == 0 && pathDistance.getY() == 0)
@@ -62,7 +67,7 @@ public class MapPoint {
 		}
 		
 		else if (!(currentPoint.equals(endPoint)) && (currentPoint.getX() != 0) && (currentPoint.getY() != 0)
-				&& MapTile.checkTileOccupied(new MapPoint(currentPoint.getX() + 1, currentPoint.getY())) == false)
+				&& myGameBoard.getTile(new MapPoint(currentPoint.getX() + 1, currentPoint.getY())).getOccupantType() == Occupant.NONE)
 		{
 
 			currentPoint.set(currentPoint.getX() + 1, currentPoint.getY() - 1);
@@ -74,7 +79,7 @@ public class MapPoint {
 		}
 		
 		else if (!(currentPoint.equals(endPoint)) && (currentPoint.getY() != 0)
-			&& MapTile.checkTileOccupied(new MapPoint(currentPoint.getX(), currentPoint.getY() - 1)) == false)
+			&& myGameBoard.getTile(new MapPoint(currentPoint.getX(), currentPoint.getY() - 1)).getOccupantType() == Occupant.NONE)
 		{
 			currentPoint.set(currentPoint.getY() - 1, currentPoint.getX());
 			pathQueue.add(currentPoint);
@@ -82,7 +87,7 @@ public class MapPoint {
 		}
 		
 		else if (!(currentPoint.equals(endPoint)) && (currentPoint.getX() != 0)
-			&& MapTile.checkTileOccupied(new MapPoint(currentPoint.getX(), currentPoint.getY() - 1)) == false)
+			&& myGameBoard.getTile(new MapPoint(currentPoint.getX(), currentPoint.getY() - 1)).getOccupantType() == Occupant.NONE)
 		{
 			currentPoint.set(currentPoint.getX() + 1, currentPoint.getY());
 			pathQueue.add(currentPoint);
@@ -90,7 +95,7 @@ public class MapPoint {
 		}
 		
 		else if (!(currentPoint.equals(endPoint))
-			&& MapTile.checkTileOccupied(new MapPoint(currentPoint.getX(), currentPoint.getY() - 1)) == false)
+			&& myGameBoard.getTile(new MapPoint(currentPoint.getX(), currentPoint.getY() - 1)).getOccupantType() == Occupant.NONE)
 		{
 			currentPoint.set(currentPoint.getX(), currentPoint.getY() + 1);
 			pathQueue.add(currentPoint);
@@ -98,7 +103,7 @@ public class MapPoint {
 		}
 		
 		else if (!(currentPoint.equals(endPoint))
-			&& MapTile.checkTileOccupied(new MapPoint(currentPoint.getX(), currentPoint.getY() - 1)) == false)
+			&& myGameBoard.getTile(new MapPoint(currentPoint.getX(), currentPoint.getY() - 1)).getOccupantType() == Occupant.NONE)
 		{
 			currentPoint.set(currentPoint.getX() - 1, currentPoint.getY());
 			pathQueue.add(currentPoint);
@@ -178,7 +183,5 @@ public class MapPoint {
 		
 		result = "" + sb;
 		return result;
-		
-		Map awesome - new Map<Object>
 	}
 }

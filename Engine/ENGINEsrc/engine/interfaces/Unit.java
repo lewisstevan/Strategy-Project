@@ -7,6 +7,8 @@ package engine.interfaces;
  * @author trent
  * @version 20140821
  */
-public interface Unit {
-
+public interface Unit 
+{
+	
+	public void move();
 }

@@ -13,6 +13,7 @@ public abstract class AoEAbility extends Ability {
 	 */
 	protected int EffectRadius;
 	
+	
 	/**
 	 * Retrieves the area of the abilities effect.
 	 * @return EffectRadius the area of the abilities effects.
